@@ -52,7 +52,7 @@ class AppFixtures extends Fixture
             $manager->persist($address);
         }
 
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $category = new Category();
             $category->setName($faker->words(1, true));
             $manager->persist($category);
