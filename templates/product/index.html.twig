@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits - commerce{% endblock %}
+
+{% block body %}
+
+    <ul>
+    
+        {% for product in products %}
+            <li><img src="{{ product.image }}" alt="{{ product.name }}" style="height:100px;"></li>
+            <li>{{ product.name }}</li>
+            <li>{{ product.brand }}</li>
+            <li>{{ product.price|number_format(2, ',', ' ') }}€</li>
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}
