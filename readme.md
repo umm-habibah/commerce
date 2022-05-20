@@ -25,6 +25,6 @@ php bin/phpunit --testdox
 symfony console doctrine:fixtures:load -n
 ```
 
-## Annexe
+## Images
 
-* Image fixture : https://unsplash.com/photos/4kTbAMRAHtQ
+* Fixture : https://unsplash.com/photos/4kTbAMRAHtQ
