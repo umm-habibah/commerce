@@ -3,5 +3,14 @@
 
     {{ form_row(form.categories) }}
 
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.min) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.max) }}
+        </div>
+    </div>
+
     <button type="submit" class="btn btn-primary">Appliquer</button>
 {{ form_end(form) }}
