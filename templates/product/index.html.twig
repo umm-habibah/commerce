@@ -7,8 +7,12 @@
     <ul>
     
         {% for product in products %}
-            <li><img src="{{ product.image }}" alt="{{ product.name }}" style="height:100px;"></li>
-            <li>{{ product.name }}</li>
+            <li>
+                <a href="{{ path('product', {'slug': product.slug}) }}">
+                    <img src="{{ product.image }}" alt="{{ product.name }}" style="height:100px;">
+                </a>
+            </li>
+            <li><a href="{{ path('product', {'slug': product.slug}) }}">{{ product.name }}</a></li>
             <li>{{ product.brand }}</li>
             <li>{{ product.price|number_format(2, ',', ' ') }}€</li>
         {% endfor %}
