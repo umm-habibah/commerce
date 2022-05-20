@@ -18,6 +18,7 @@ class ProductTest extends TestCase
                 ->setDescription('description')
                 ->setPrice(1234)
                 ->setImage('image')
+                ->setSlug('slug')
                 ->setCategory($category);
 
         $this->assertTrue($product->getName() === 'name');
@@ -25,6 +26,7 @@ class ProductTest extends TestCase
         $this->assertTrue($product->getDescription() === 'description');
         $this->assertTrue($product->getPrice() == 1234);
         $this->assertTrue($product->getImage() === 'image');
+        $this->assertTrue($product->getSlug() === 'slug');
         $this->assertTrue($product->getCategory() === $category);
     }
 
@@ -37,6 +39,7 @@ class ProductTest extends TestCase
                 ->setBrand('brand')
                 ->setDescription('description')
                 ->setPrice(1234)
+                ->setSlug('slug')
                 ->setImage('image')
                 ->setCategory($category);
 
@@ -45,6 +48,7 @@ class ProductTest extends TestCase
         $this->assertFalse($product->getDescription() === 'false');
         $this->assertFalse($product->getPrice() == 123);
         $this->assertFalse($product->getImage() === 'false');
+        $this->assertFalse($product->getSlug() === 'false');
         $this->assertFalse($product->getCategory() === new Category());
     }
 
@@ -57,6 +61,7 @@ class ProductTest extends TestCase
         $this->assertEmpty($product->getDescription());
         $this->assertEmpty($product->getPrice());
         $this->assertEmpty($product->getImage());
+        $this->assertEmpty($product->getSlug());
         $this->assertEmpty($product->getCategory());
         $this->assertEmpty($product->getId());
     }
