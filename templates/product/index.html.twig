@@ -4,19 +4,34 @@
 
 {% block body %}
 
-    <ul>
+    <div class="row">
     
-        {% for product in products %}
-            <li>
-                <a href="{{ path('product', {'slug': product.slug}) }}">
-                    <img src="{{ product.image }}" alt="{{ product.name }}" style="height:100px;">
-                </a>
-            </li>
-            <li><a href="{{ path('product', {'slug': product.slug}) }}">{{ product.name }}</a></li>
-            <li>{{ product.brand }}</li>
-            <li>{{ product.price|number_format(2, ',', ' ') }}€</li>
-        {% endfor %}
+        <div class="col-md-3">
+            {% include "product/_filter.html.twig" %}
 
-    </ul>
+        </div>
+
+        <div class="col-md-9">
+        
+            <div class="row">
+            
+                <ul>
+    
+                    {% for product in products %}
+                        <li>
+                            <a href="{{ path('product', {'slug': product.slug}) }}">
+                                <img src="{{ product.image }}" alt="{{ product.name }}" style="height:100px;">
+                            </a>
+                        </li>
+                        <li><a href="{{ path('product', {'slug': product.slug}) }}">{{ product.name }}</a></li>
+                        <li>{{ product.brand }}</li>
+                        <li>{{ product.price|number_format(2, ',', ' ') }}€</li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    
+    </div>
 
 {% endblock %}
