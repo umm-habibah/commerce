@@ -15,20 +15,22 @@
         
             <div class="row">
             
-                <ul>
-    
-                    {% for product in products %}
-                        <li>
-                            <a href="{{ path('product', {'slug': product.slug}) }}">
-                                <img src="{{ product.image }}" alt="{{ product.name }}" style="height:100px;">
+                {% for product in products %}
+                    
+                    <div class="col-md-4">
+                        <figure class="figure">
+                            <a href="{{ path('product', { 'slug': product.slug }) }}">
+                                <img src="{{ product.image }}" class="figure-img img-fluid rounded" alt="{{ product.name }}">
                             </a>
-                        </li>
-                        <li><a href="{{ path('product', {'slug': product.slug}) }}">{{ product.name }}</a></li>
-                        <li>{{ product.brand }}</li>
-                        <li>{{ product.price|number_format(2, ',', ' ') }}€</li>
-                    {% endfor %}
+                            <figcaption class="figure-caption">
+                                <a href="{{ path('product', { 'slug': product.slug }) }}">
+                                    {{ product.name }}
+                                </a> <br> {{ product.brand }} <br> {{ product.price|number_format(0, ',', ' ') }}€
+                            </figcaption>
+                        </figure>
+                    </div>
+                {% endfor %}
 
-                </ul>
             </div>
         </div>
     
