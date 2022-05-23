@@ -26,6 +26,7 @@
                                 <a href="{{ path('product', { 'slug': product.slug }) }}">
                                     {{ product.name }}
                                 </a> <br> {{ product.brand }} <br> {{ product.price|number_format(0, ',', ' ') }}€
+                                <a href="{{ path('cart_add', { 'id': product.id }) }}">Panier</a>
                             </figcaption>
                         </figure>
                     </div>
