@@ -28,7 +28,11 @@
                             </div>
                         </div>
                     </th>
-                    <td>{{ product.quantity }}</td>
+                    <td>
+                        <a href="{{ path('cart_decrease', { 'id': product.product.id }) }}">-</a>
+                        {{ product.quantity }}
+                        <a href="{{ path('cart_add', { 'id': product.product.id }) }}">+</a>
+                    </td>
                     <td>{{ product.product.price|number_format(0, ',', ' ') }}€</td>
                     <td>{{ (product.product.price * product.quantity)|number_format(0, ',', ' ') }}€</td>
                     <td>
