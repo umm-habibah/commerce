@@ -4,15 +4,40 @@
 
 {% block body %}
 
-    <ul>
-        <li>
-            <img src="{{ product.image }}" alt="{{ product.name }}" style="height:200px;">
-        </li>
-        <li>{{ product.name }}</li>
-        <li>{{ product.brand }}</li>
-        <li>{{ product.description }}</li>
-        <li>{{ product.price|number_format(2, ',', ' ') }}€</li>
-        <li><a href="#">Ajouter au panier</a></li>
-    </ul>
+    <div class="row">
+
+        <div class="nav-bread">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('products') }}">Produits</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="col-md-6">
+        
+            <img src="{{ product.image }}" alt="{{ product.name }}" class="img-fluid">
+        </div>
+
+
+        <div class="col-md-6">
+        
+            <div class="sticky-top-info">
+
+                <ul class="list-inline">
+                    <li class="list-inline-item"><h1>{{ product.name }}</h1></li>
+                    <li class="list-inline-item">{{ product.brand }}</li>
+                    <li class="list-inline-item"><span class="list-inline-price">{{ product.price|number_format(2, ',', ' ') }}€</span></li>
+                </ul>
+                
+                
+                <p class="text-muted">{{ product.description }}</p>
+                
+                <a href="{{ path('cart_add', { 'id': product.id }) }}" class="">Ajouter au panier</a>
+            </div>
+        
+        </div>
+    </div>
 
 {% endblock %}

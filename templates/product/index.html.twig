@@ -23,10 +23,15 @@
                                 <img src="{{ product.image }}" class="figure-img img-fluid rounded" alt="{{ product.name }}">
                             </a>
                             <figcaption class="figure-caption">
-                                <a href="{{ path('product', { 'slug': product.slug }) }}">
-                                    {{ product.name }}
-                                </a> <br> {{ product.brand }} <br> {{ product.price|number_format(0, ',', ' ') }}€
-                                <a href="{{ path('cart_add', { 'id': product.id }) }}">Panier</a>
+                                <a href="{{ path('product', { 'slug': product.slug }) }}" class="figure-caption-link text-muted text-uppercase">
+                                    <span class="figure-caption-name">{{ product.name }}</span>
+                                </a> <br> <span class="figure-caption-brand">{{ product.brand }}</span> <br>
+                                <span class="figure-caption-price">{{ product.price|number_format(0, ',', ' ') }}€</span>
+                                <span class="figure-btn-add-cart">
+                                    <a href="{{ path('cart_add', { 'id': product.id }) }}">
+                                        <i class="fa-solid fa-bag-shopping btn-icon"></i>
+                                    </a>
+                                </span>
                             </figcaption>
                         </figure>
                     </div>
