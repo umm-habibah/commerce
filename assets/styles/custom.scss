@@ -8,12 +8,45 @@ body {
     color: #5a5a5a;
 }
 
+.btn-icon {
+    color: #0d6efd;
+    font-size: 1.3em;
+}
+
+.sticky-top-info {
+    display: block;
+    position: sticky;
+    top: 60px;
+}
+
+.nav-bread {
+    font-size: 13px;
+}
+
 /* Featurettes
 ------------------------- */
 
 .featurette-divider {
     margin: 5rem 0; /* Space out the Bootstrap <hr> more */
 }
+
+
+/* PRODUCT STYLES
+-------------------------------------------------- */
+/* index.html.twig */
+
+.figure-caption-price {
+    font-weight: 600;
+}
+
+.figure-caption-brand {
+    font-weight: 500;
+}
+
+.figure-btn-add-cart {
+    float: right;
+}
+
 
 
 /* RESPONSIVE CSS
