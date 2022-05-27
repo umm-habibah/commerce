@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte | Mes adresses - commerce{% endblock %}
+
+{% block body %}
+
+    <div class="nav-bread">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Mes adresses</li>
+            </ol>
+        </nav>
+    </div>
+
+    <a href="{{ path('profile_address_add') }}">Ajouter une adresse</a>
+
+    <hr>
+
+    <div class="row">
+
+        {% include "notifications/notification.html.twig" %}
+    
+        {% if app.user.addresses|length > 0 %}
+        
+            {% for address in app.user.addresses %}
+                <div class="col-md-3">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ address.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ address.lastname }} {{ address.firstname }}</h6>
+                            <p class="card-text">
+                                {{ address.address }}, {{ address.country }} <br>
+                                {{ address.zipcode }} - {{ address.city }} <br>
+                                {{ address.phone }}
+                            </p>
+                            <a href="{{ path('profile_address_edit', { 'id': address.id }) }}" class="card-link">Modifier</a>
+                            <a href="{{ path('profile_address_delete', { 'id': address.id }) }}" class="card-link">Suppirmer</a>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                Vous n'avez pas d'adresses enregistrées pour le moment. Vous pouvez en ajouter une 
+                <a href="{{ path('profile_address_add') }}" class="alert-link">ici</a>.
+            </div>
+
+        {% endif %}
+    </div>
+
+{% endblock %}
