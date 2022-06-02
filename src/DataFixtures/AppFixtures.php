@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
             $order->setReference($date->format('d-m-Y').uniqid())
                   ->setCarrierName($carrier->getName())
                   ->setCarrierPrice($carrier->getPrice())
-                  ->setState($faker->randomElement([0, 1, 2]))
+                  ->setState($faker->randomElement([0, 1, 2, 3]))
                   ->setStripe($faker->randomElement([null, $faker->words(1, true)]))
                   ->setCreatedAt($faker->dateTimeBetween('-6 months', 'now'))
                   ->setAddress($faker->address())
