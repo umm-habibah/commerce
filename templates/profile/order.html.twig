@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte | Mes commandes - commerce{% endblock %}
+
+{% block body %}
+
+    <div class="nav-bread">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Mes commandes</li>
+            </ol>
+        </nav>
+    </div>
+
+    <hr>
+
+    <div class="row">
+    
+        {% if app.user.orders|length > 0 %}
+        
+            <div class="table-responsive-md">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in app.user.orders %}
+                            <tr>
+                                <th scope="row">{{ order.createdAt|date('d-m-Y') }}</th>
+                                <td>
+                                    {% if order.state == 0 %}
+                                        En cours de validation
+                                    {% elseif order.state == 1 %}
+                                        Commande validée
+                                    {% elseif order.state == 2 %}
+                                        En cours de préparation
+                                    {% elseif order.state == 3 %}
+                                        En cours de livraison
+                                    {% endif %}
+                                </td>
+                                <td><a href="#">Détails</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                Vous n'avez pas passé de commande pour le moment sur <strong>commerce</strong>.
+                Vous pouvez voir notre catalogue de produits <a href="{{ path('products') }}" class="alert-link">ici</a>.
+            </div>
+
+        {% endif %}
+    </div>
+
+{% endblock %}
