@@ -34,16 +34,14 @@
                                 <th scope="row">{{ order.createdAt|date('d-m-Y') }}</th>
                                 <td>
                                     {% if order.state == 0 %}
-                                        En cours de validation
+                                        commande validée
                                     {% elseif order.state == 1 %}
-                                        Commande validée
+                                        en cours de préparation
                                     {% elseif order.state == 2 %}
-                                        En cours de préparation
-                                    {% elseif order.state == 3 %}
-                                        En cours de livraison
+                                        en cours de livraison
                                     {% endif %}
                                 </td>
-                                <td><a href="#">Détails</a></td>
+                                <td><a href="{{ path('profile_order_show', { 'reference': order.reference }) }}">Détails</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

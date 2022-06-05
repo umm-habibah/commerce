@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte | Commande {{ order.reference }} - commerce{% endblock %}
+
+{% block body %}
+
+    <div class="nav-bread">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('profile_order') }}">Mes commandes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Commande n°{{ order.reference }}</li>
+            </ol>
+        </nav>
+    </div>
+
+    <hr>
+
+    <div class="row">
+    
+        <p class="lead">
+            Votre commande <strong><u>n°{{ order.reference }}</u></strong> effectuée le <strong>{{ order.createdAt|date('d-m-Y') }}</strong>
+            est actuellement 
+            {% if order.state == 1 %}
+                <strong>commande validée</strong>.
+            {% elseif order.state == 2 %}
+                <strong>en cours de préparation</strong>.
+            {% elseif order.state == 3 %}
+                <strong>en cours de livraison</strong>.
+            {% endif %}
+            {{ order.carrierName }}
+        </p>
+
+        <hr>
+
+        <div class="table-responsive-md">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">Produit(s)</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in order.details %}
+                        <tr>
+                            <td>{{ product.product }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>{{ product.price }}€</td>
+                            <td>{{ product.total }}€</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <strong>Sous-total</strong> {{ order.getTotal }}€ <br>
+            <strong>Livraison</strong> {{ order.carrierPrice }}€ <br>
+            <strong>Total</strong> {{ order.carrierPrice +  order.getTotal }}€ <br>
+        </div>
+    </div>
+
+{% endblock %}

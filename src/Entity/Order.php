@@ -201,4 +201,13 @@ class Order
 
         return $this;
     }
+
+    public function getTotal(): ?int
+    {
+        $total = 0;
+        foreach ($this->getDetails()->getValues() as $product) {
+            $total = $total + ($product->getPrice() * $product->getQuantity());
+        }
+        return $total;
+    }
 }
