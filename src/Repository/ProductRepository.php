@@ -6,6 +6,8 @@ use App\Classes\Search;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Product>
@@ -17,9 +19,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Product::class);
+        $this->paginator = $paginator;
     }
 
     public function add(Product $entity, bool $flush = false): void
@@ -40,7 +45,13 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-    public function findBySearch(Search $search)
+    /**
+     * Récupère les produits en lien avec une recherche
+     *
+     * @param Search $search
+     * @return PaginationInterface
+     */
+    public function findBySearch(Search $search): PaginationInterface
     {
         $query = $this
             ->createQueryBuilder('p')
@@ -71,9 +82,11 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('max', $search->max);
         }
 
-        return $query
-            ->getQuery()
-            ->getResult()
+        return $this->paginator->paginate(
+                $query,
+                $search->page,
+                12
+            )
         ;
     }
 
