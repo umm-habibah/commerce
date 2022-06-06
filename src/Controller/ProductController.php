@@ -44,11 +44,9 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchType::class, $search);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $products = $this->repository->findBySearch($search);
-        } else {
-            $products = $this->repository->findAll();
-        }
+
+        $search->page = $request->get('page', 1);
+        $products = $this->repository->findBySearch($search);
 
         return $this->renderForm('product/index.html.twig', [
             'products' => $products,

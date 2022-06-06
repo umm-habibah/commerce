@@ -37,4 +37,11 @@ class Search
      * @var null|integer
      */
     public $max;
+
+    /**
+     * Page
+     *
+     * @var integer
+     */
+    public $page = 1;
 }
