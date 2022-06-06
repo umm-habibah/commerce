@@ -22,24 +22,40 @@ class RegisterController extends AbstractController
     private $entityManager;
 
     /**
-     * Constructeur.
+     * User repository
+     *
+     * @var UserRepository
+     */
+    private $repository;
+
+    /**
+     * Password hasher
+     *
+     * @var UserPasswordHasherInterface
+     */
+    private $hasher;
+
+    /**
+     * Constructeur
      *
      * @param EntityManagerInterface $entityManager
+     * @param UserRepository $repository
+     * @param UserPasswordHasherInterface $hasher
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, UserRepository $repository, UserPasswordHasherInterface $hasher)
     {
         $this->entityManager = $entityManager;
+        $this->repository = $repository;
+        $this->hasher = $hasher;
     }
 
     /**
      * @Route("/register", name="register")
      *
      * @param Request $request
-     * @param UserRepository $repository
-     * @param UserPasswordHasherInterface $hasher
      * @return Response
      */
-    public function index(Request $request, UserRepository $repository, UserPasswordHasherInterface $hasher): Response
+    public function index(Request $request): Response
     {
         $user = new User();
 
@@ -49,9 +65,9 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $email = $repository->findOneBy(['email' => $user->getEmail()]);
+            $email = $this->repository->findOneBy(['email' => $user->getEmail()]);
             if (!$email) {
-                $password = $hasher->hashPassword($user, $user->getPassword());
+                $password = $this->hasher->hashPassword($user, $user->getPassword());
                 $user->setPassword($password);
 
                 $this->entityManager->persist($user);
@@ -62,6 +78,7 @@ class RegisterController extends AbstractController
                 $this->addFlash('danger', 'Adresse e-mail déjà utilisée.');
             }
         }
+
         return $this->renderForm('register/index.html.twig', [
             'form' => $form
         ]);

@@ -4,14 +4,48 @@
 
 {% block body %}
 
-    <h1>Mon compte</h1>
-
-    <hr>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Mon compte</h1>
+            <p class="col-md-8 fs-4">{{ app.user.lastname }} {{ app.user.firstname }}</p>
+        </div>
+    </div>
 
     {% include "notifications/notification.html.twig" %}
 
-    - <a href="{{ path('profile_password') }}">Mon mot de passe</a> <br>
-    - <a href="{{ path('profile_address') }}">Mes adresses</a> <br>
-    - <a href="{{ path('profile_order') }}">Mes commandes</a>
+    <div class="row">
+        <div class="col-sm-6 profile">
+            <div class="card profile-card">
+                <div class="card-body profile-card-body">
+                    <h5 class="card-title profile-card-title">
+                        <a href="{{ path('profile_password') }}" class="profile-card-link text-decoration-none">Mon mot de passe</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 profile">
+            <div class="card profile-card">
+                <div class="card-body profile-card-body">
+                    <h5 class="card-title profile-card-title">
+                        <a href="{{ path('profile_address') }}" class="profile-card-link text-decoration-none">Mes adresses</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-sm-6 profile">
+            <div class="card profile-card">
+                <div class="card-body profile-card-body">
+                    <h5 class="card-title profile-card-title">
+                        <a href="{{ path('profile_order') }}" class="profile-card-link text-decoration-none">Mes commandes</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+    
 {% endblock %}

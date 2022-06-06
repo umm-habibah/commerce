@@ -7,10 +7,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @package App\Controller
+ */
 class CartController extends AbstractController
 {
     /**
      * @Route("/cart", name="cart")
+     *
+     * @param Cart $cart
+     * @return Response
      */
     public function index(Cart $cart): Response
     {
@@ -21,6 +27,10 @@ class CartController extends AbstractController
 
     /**
      * @Route("/cart/add/{id}", name="cart_add")
+     *
+     * @param Cart $cart
+     * @param integer $id
+     * @return Response
      */
     public function add(Cart $cart, $id): Response
     {
@@ -30,6 +40,10 @@ class CartController extends AbstractController
 
     /**
      * @Route("/cart/delete/{id}", name="cart_delete")
+     *
+     * @param Cart $cart
+     * @param integer $id
+     * @return Response
      */
     public function delete(Cart $cart, $id): Response
     {
@@ -37,9 +51,13 @@ class CartController extends AbstractController
         return $this->redirectToRoute('cart');
     }
 
-    /**
-     * @Route("/cart/decrease/{id}", name="cart_decrease")
-     */
+   /**
+    * @Route("/cart/decrease/{id}", name="cart_decrease")
+    *
+    * @param Cart $cart
+    * @param integer $id
+    * @return Response
+    */
     public function decrease(Cart $cart, $id): Response
     {
         $cart->decrease($id);

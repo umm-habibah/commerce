@@ -3,50 +3,53 @@
 namespace App\Controller;
 
 use App\Classes\Search;
-use App\Entity\Product;
 use App\Form\SearchType;
 use App\Repository\ProductRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @package App\Controller
+ */
 class ProductController extends AbstractController
 {
     /**
-     * Doctrine.
+     * Product repository
      *
-     * @var EntityManagerInterface
+     * @var ProductRepository
      */
-    private $entityManager;
+    private $repository;
 
     /**
-     * Constructeur.
+     * Constructeur
      *
-     * @param EntityManagerInterface $entityManager
+     * @param ProductRepository $repository
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(ProductRepository $repository)
     {
-        $this->entityManager = $entityManager;
+        $this->repository = $repository;
     }
 
     /**
      * @Route("/product", name="products")
      *
+     * @param Request $request
      * @return Response
      */
-    public function index(Request $request, ProductRepository $repository): Response
+    public function index(Request $request): Response
     {
         $search = new Search();
         $form = $this->createForm(SearchType::class, $search);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $products = $repository->findBySearch($search);
+            $products = $this->repository->findBySearch($search);
         } else {
-            $products = $repository->findAll();
+            $products = $this->repository->findAll();
         }
+
         return $this->renderForm('product/index.html.twig', [
             'products' => $products,
             'form' => $form
@@ -61,10 +64,11 @@ class ProductController extends AbstractController
      */
     public function show($slug): Response
     {
-        $product = $this->entityManager->getRepository(Product::class)->findOneBy(['slug' => $slug]);
+        $product = $this->repository->findOneBy(['slug' => $slug]);
         if (!$product) {
             return $this->redirectToRoute('products');
         }
+        
         return $this->render('product/show.html.twig', [
             'product' => $product
         ]);

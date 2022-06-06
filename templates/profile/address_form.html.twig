@@ -4,15 +4,23 @@
 
 {% block body %}
 
-    <div class="nav-bread">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
-                <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mes adresses</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Mon adresse</li>
-            </ol>
-        </nav>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Mon compte</h1>
+            <p class="col-md-8 fs-4">{{ app.user.lastname }} {{ app.user.firstname }}</p>
+        </div>
+
+        <div class="nav-bread">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mes adresses</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Mon adresse</li>
+                </ol>
+            </nav>
+        </div>
     </div>
+    
 
     
     {{ form_start(form) }}
@@ -42,10 +50,11 @@
                 {{ form_row(form.phone) }}
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-secondary">Valider</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </div>
     {{ form_end(form) }}
     
+    <hr class="featurette-divider">
 
 {% endblock %}

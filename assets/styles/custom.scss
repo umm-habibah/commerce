@@ -9,7 +9,7 @@ body {
 }
 
 .btn-icon {
-    color: #0d6efd;
+    color: #198754;
     font-size: 1.3em;
 }
 
@@ -21,6 +21,20 @@ body {
 
 .nav-bread {
     font-size: 13px;
+}
+
+.nav-link.nav-header {
+    color: hsla(0,0%,100%,.55);
+}
+
+.nav-link.nav-header:hover {
+    color: #fff;
+}
+
+.container.footer {
+    position: absolute;
+    text-align: center;
+    width: 100%;
 }
 
 /* Featurettes
@@ -47,7 +61,51 @@ body {
     float: right;
 }
 
+/* PROFILE STYLES
+-------------------------------------------------- */
+/* index.html.twig */
 
+.profile {
+    margin-bottom: 1.75rem;
+}
+
+.profile-card {
+    padding: 70px;
+}
+
+.profile-card-title {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.profile-card-link {
+    color: #000;
+}
+
+.profile-card-link:hover {
+    color: #6c757d;
+}
+
+/* address.html.twig */
+.profile-address-btn {
+    float: right;
+}
+
+.profile-address-delete-link {
+    float: right;
+}
+
+/* CART STYLES
+-------------------------------------------------- */
+/* index.html.twig */
+
+.img-fluid.cart-img {
+    height: 100px;
+}
+
+.cart-link-checkout {
+    float: right;
+}
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */

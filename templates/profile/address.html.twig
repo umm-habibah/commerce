@@ -4,18 +4,23 @@
 
 {% block body %}
 
-    <div class="nav-bread">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Mes adresses</li>
-            </ol>
-        </nav>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Mon compte</h1>
+            <p class="col-md-8 fs-4">{{ app.user.lastname }} {{ app.user.firstname }}</p>
+            <a href="{{ path('profile_address_add') }}" class="btn btn-primary profile-address-btn">Ajouter une adresse</a>
+        </div>
+
+        <div class="nav-bread">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Mes adresses</li>
+                </ol>
+            </nav>
+        </div>
     </div>
 
-    <a href="{{ path('profile_address_add') }}">Ajouter une adresse</a>
-
-    <hr>
 
     <div class="row">
 
@@ -35,8 +40,13 @@
                                 {{ address.zipcode }} - {{ address.city }} <br>
                                 {{ address.phone }}
                             </p>
-                            <a href="{{ path('profile_address_edit', { 'id': address.id }) }}" class="card-link">Modifier</a>
-                            <a href="{{ path('profile_address_delete', { 'id': address.id }) }}" class="card-link">Suppirmer</a>
+                            <a href="{{ path('profile_address_edit', { 'id': address.id }) }}" class="card-link profile-address-link">
+                                Modifier
+                            </a>
+
+                            <a href="{{ path('profile_address_delete', { 'id': address.id }) }}" class="card-link profile-address-delete-link">
+                                Suppirmer
+                            </a>
                         </div>
                     </div>
 
@@ -51,5 +61,7 @@
 
         {% endif %}
     </div>
+
+    <hr class="featurette-divider">
 
 {% endblock %}
