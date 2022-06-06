@@ -2,26 +2,47 @@
 
 namespace App\Classes;
 
-use App\Entity\Product;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+/**
+ * @package App\Classes
+ * Représentation d'un panier sous forme d'un tableau associatif (produit => quantité)
+ * Opéation sur le panier
+ */
 class Cart
 {
+    /**
+     * Session
+     *
+     * @var RequestStack
+     */
     private $requestStack;
 
-    private $entityManager;
+   /**
+    * Product repository
+    *
+    * @var ProductRepository
+    */
+    private $repository;
 
-    public function __construct(RequestStack $requestStack, EntityManagerInterface $entityManager)
+    /**
+     * Constructeur
+     *
+     * @param RequestStack $requestStack
+     * @param ProductRepository $repository
+     */
+    public function __construct(RequestStack $requestStack, ProductRepository $repository)
     {
         $this->requestStack = $requestStack;
-        $this->entityManager = $entityManager;
+        $this->repository = $repository;
     }
 
     public function get()
     {
         $session = $this->requestStack->getSession();
         $cart = $session->get('cart');
+
         return $cart;
     }
 
@@ -68,7 +89,7 @@ class Cart
         $cartComplete = [];
         if ($this->get()) {
             foreach ($this->get() as $id => $quantity) {
-                $product = $this->entityManager->getRepository(Product::class)->findOneBy(['id' => $id]);
+                $product = $this->repository->findOneBy(['id' => $id]);
                 if (!$product) {
                     $this->delete($id);
                     continue;

@@ -1,16 +1,24 @@
 {{ form_start(form) }}
-    {{ form_row(form.q) }}
-
-    {{ form_row(form.categories) }}
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-auto">
+            {{ form_row(form.q) }}
+        </div>
+
+        <div class="col-auto">
             {{ form_row(form.min) }}
         </div>
-        <div class="col-6">
+        <div class="col-auto">
             {{ form_row(form.max) }}
+        </div>
+
+        <div class="col-auto">
+            {{ form_row(form.categories) }}
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Appliquer</button>
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary mt-2">Appliquer</button>
 {{ form_end(form) }}

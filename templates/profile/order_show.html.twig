@@ -4,17 +4,23 @@
 
 {% block body %}
 
-    <div class="nav-bread">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
-                <li class="breadcrumb-item"><a href="{{ path('profile_order') }}">Mes commandes</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Commande n°{{ order.reference }}</li>
-            </ol>
-        </nav>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Mon compte</h1>
+            <p class="col-md-8 fs-4">{{ app.user.lastname }} {{ app.user.firstname }}</p>
+        </div>
+
+        <div class="nav-bread">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path('profile_order') }}">Mes commandes</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Commande n°{{ order.reference }}</li>
+                </ol>
+            </nav>
+        </div>
     </div>
 
-    <hr>
 
     <div class="row">
     
@@ -28,12 +34,14 @@
             {% elseif order.state == 3 %}
                 <strong>en cours de livraison</strong>.
             {% endif %}
-            {{ order.carrierName }}
         </p>
 
-        <hr>
+        <p class="lead">
+            Vous avez choisit <strong>{{ order.carrierName }}</strong> comme transporteur.
+        </p>
 
-        <div class="table-responsive-md">
+
+        <div class="table-responsive-md mt-3">
             <table class="table align-middle">
                 <thead>
                     <tr>
@@ -47,8 +55,8 @@
                     {% for product in order.details %}
                         <tr>
                             <td>{{ product.product }}</td>
-                            <td>{{ product.quantity }}</td>
                             <td>{{ product.price }}€</td>
+                            <td>{{ product.quantity }}</td>
                             <td>{{ product.total }}€</td>
                         </tr>
                     {% endfor %}
@@ -56,11 +64,13 @@
             </table>
         </div>
 
-        <div>
-            <strong>Sous-total</strong> {{ order.getTotal }}€ <br>
-            <strong>Livraison</strong> {{ order.carrierPrice }}€ <br>
-            <strong>Total</strong> {{ order.carrierPrice +  order.getTotal }}€ <br>
+        <div class="text-end">
+            <strong>Sous-total:</strong> {{ order.getTotal }}€ <br>
+            <strong>Livraison:</strong> {{ order.carrierPrice }}€ <br>
+            <strong>Total:</strong> {{ order.carrierPrice +  order.getTotal }}€ <br>
         </div>
     </div>
 
+    <hr class="featurette-divider">
+    
 {% endblock %}

@@ -34,10 +34,14 @@
                 
                 <p class="text-muted">{{ product.description }}</p>
                 
-                <a href="{{ path('cart_add', { 'id': product.id }) }}" class="">Ajouter au panier</a>
+                <hr>
+                
+                <a href="{{ path('cart_add', { 'id': product.id }) }}" class="btn btn-primary">Ajouter</a>
             </div>
         
         </div>
     </div>
+
+    <hr class="featurette-divider">
 
 {% endblock %}

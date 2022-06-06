@@ -4,16 +4,22 @@
 
 {% block body %}
 
-    <div class="nav-bread">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Mes commandes</li>
-            </ol>
-        </nav>
-    </div>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Mon compte</h1>
+            <p class="col-md-8 fs-4">{{ app.user.lastname }} {{ app.user.firstname }}</p>
+        </div>
 
-    <hr>
+        <div class="nav-bread">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('profile') }}">Mon compte</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Mes commandes</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
 
     <div class="row">
     
@@ -33,12 +39,12 @@
                             <tr>
                                 <th scope="row">{{ order.createdAt|date('d-m-Y') }}</th>
                                 <td>
-                                    {% if order.state == 0 %}
-                                        commande validée
-                                    {% elseif order.state == 1 %}
-                                        en cours de préparation
+                                    {% if order.state == 1 %}
+                                        <span class="badge bg-primary">commande validée</span>
                                     {% elseif order.state == 2 %}
-                                        en cours de livraison
+                                        <span class="badge bg-warning">en cours de préparation</span>
+                                    {% elseif order.state == 3 %}
+                                        <span class="badge bg-success">en cours de livraison</span>
                                     {% endif %}
                                 </td>
                                 <td><a href="{{ path('profile_order_show', { 'reference': order.reference }) }}">Détails</a></td>
@@ -57,4 +63,6 @@
         {% endif %}
     </div>
 
+    <hr class="featurette-divider">
+    
 {% endblock %}

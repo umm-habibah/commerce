@@ -6,7 +6,7 @@ use App\Entity\Category;
 
 /**
  * @package App\Classes
- * Représentation d'une recherche par un objet
+ * Représentation d'une recherche sous forme d'objet
  */
 class Search
 {

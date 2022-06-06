@@ -7,10 +7,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @package App\Controller
+ */
 class ProfileOrderController extends AbstractController
 {
+    /**
+     * Order repository
+     *
+     * @var OrderRepository
+     */
     private $repository;
 
+    /**
+     * Constructeur
+     *
+     * @param OrderRepository $repository
+     */
     public function __construct(OrderRepository $repository)
     {
         $this->repository = $repository;
@@ -36,6 +49,7 @@ class ProfileOrderController extends AbstractController
         if (!$order) {
             return $this->redirectToRoute('profile_order');
         }
+
         return $this->render('profile/order_show.html.twig', [
             'order' => $order
         ]); 

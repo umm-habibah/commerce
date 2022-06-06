@@ -11,12 +11,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @package App\Controller
+ */
 class ProfileAddressController extends AbstractController
 {
+    /**
+     * Address repository
+     *
+     * @var AddressRepository
+     */
     private $repository;
 
+    /**
+     * Doctrine
+     *
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
+    /**
+     * Constructeur
+     *
+     * @param AddressRepository $repository
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(AddressRepository $repository, EntityManagerInterface $entityManager)
     {
         $this->repository = $repository;
@@ -57,6 +76,7 @@ class ProfileAddressController extends AbstractController
 
             return $this->redirectToRoute('profile_address');
         }
+
         return $this->renderForm('profile/address_form.html.twig', [
             'form' => $form
         ]);
@@ -77,6 +97,7 @@ class ProfileAddressController extends AbstractController
 
             $this->addFlash('info', 'Vos modifications ont été prises en compte.');
         }
+
         return $this->redirectToRoute('profile_address');
     }
 
@@ -95,6 +116,7 @@ class ProfileAddressController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $address->setUser($this->getUser());
+
             $this->entityManager->persist($address);
             $this->entityManager->flush();
 
@@ -102,6 +124,7 @@ class ProfileAddressController extends AbstractController
 
             return $this->redirectToRoute('profile_address');
         }
+
         return $this->renderForm('profile/address_form.html.twig', [
             'form' => $form
         ]);
