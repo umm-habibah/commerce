@@ -175,4 +175,9 @@ class Address
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->getAddress().', '.$this->getCountry().'[br]'.$this->getZipcode().' - '.$this->getCity().'[br]'.$this->getPhone();
+    }
 }

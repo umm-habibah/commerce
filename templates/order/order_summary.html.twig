@@ -1,0 +1,11 @@
+<div class="row {% if key > 0 %}mt-2{% endif %}">
+    <div class="col-2">
+        <img src="{{ product.product.image }}" alt="{{ product.product.name }}" class="img-fluid cart-img">
+    </div>
+    <div class="col-8 my-auto">
+        {{ product.product.name }}
+    </div>
+    <div class="col-2 my-auto">
+        x{{ product.quantity }}
+    </div>
+</div>
