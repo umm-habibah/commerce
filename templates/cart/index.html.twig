@@ -36,9 +36,9 @@
                                 </div>
                             </th>
                             <td>
-                                <a href="{{ path('cart_decrease', { 'id': product.product.id }) }}" class="text-decoration-none">-</a>
+                                <a href="{{ path('cart_decrease', { 'id': product.product.id }) }}" class="text-decoration-none btn-icon">-</a>
                                 {{ product.quantity }}
-                                <a href="{{ path('cart_add', { 'id': product.product.id }) }}" class="text-decoration-none">+</a>
+                                <a href="{{ path('cart_add', { 'id': product.product.id }) }}" class="text-decoration-none btn-icon">+</a>
                             </td>
                             <td>{{ product.product.price|number_format(0, ',', ' ') }}€</td>
                             <td>{{ (product.product.price * product.quantity)|number_format(0, ',', ' ') }}€</td>
@@ -62,7 +62,7 @@
 
         <div class="mt-4">
             <a href="{{ path('products') }}" class="cart-link-product btn btn-outline-primary">Continuer mes achats</a>
-            <a href="#" class="cart-link-checkout btn btn-success">Valider mon panier</a>
+            <a href="{{ path('order') }}" class="cart-link-checkout btn btn-success">Valider mon panier</a>
         </div>
     {% else %}
         <div class="alert alert-warning" role="alert">

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block stripejs %} 
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+		
+		<div class="col-md-6">
+
+			<strong>Mon adresse</strong><br>
+
+			<div class="form-check mt-4">
+				{{ address|raw }}
+			</div>
+
+			<hr>
+
+			<strong>Mon transporteur</strong><br>
+			
+			<div class="form-check">
+				{{ carrier.name }} <br>
+				{{ carrier.description }} <br>
+				{{ carrier.price|number_format(2, ',', ',') }} €
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			
+			<div class="text-center">
+				<strong>Ma commande</strong><br>
+			</div>
+
+			<div class="mt-2">
+				{% set total = null %}
+				{% for key, product in cart %}
+					{% include "order/order_summary.html.twig" %}
+					{% set total = total + (product.product.price * product.quantity) %}
+				{% endfor %}
+			</div>
+
+			<hr>
+
+			<p class="text-right">
+				<strong>Sous-total: {{ total|number_format(0, ',', ' ') }} €</strong><br>
+				<strong>Livraison: {{ carrier.price|number_format(0, ',', ' ') }} €</strong><br>
+				<strong>Total: {{ (total + carrier.price)|number_format(0, ',', ' ') }}€</strong>
+			</p>
+
+			<a href="{{ path('stripe_create_session', { 'reference': reference }) }}" class="btn btn-primary btn-block btn-lg w-100"
+                class="btn btn-block btn-info mt-3" id="checkout-button">
+                Valider ma commande
+            </a>
+
+		</div>			
+	</div>
+
+	<hr class="featurette-divider">
+
+{% endblock %}
